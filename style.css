@@ -38,9 +38,9 @@ body {
 
 /* Header & Navigation */
 .calendar-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
   background: var(--bg-white);
   padding: 16px 24px;
   border-bottom: 1px solid var(--border-color);
@@ -50,32 +50,80 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.header-right-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+#prevBtn {
+  align-self: center;
+}
+
+#nextBtn {
+  align-self: center;
+}
+
+.buttons-column {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
 .month-year {
   font-size: 22px;
   font-weight: 500;
   color: var(--text-dark);
+  flex: 1;
+  text-align: center;
   min-width: 200px;
 }
 
-.nav-btn {
-  padding: 8px 12px;
-  background: transparent;
-  color: var(--text-dark);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
+.btn-nav {
+  padding: 10px 18px;
+  background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   transition: all 0.2s;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+  white-space: nowrap;
 }
 
-.nav-btn:hover {
-  background: var(--bg-light);
-  border-color: var(--text-light);
+.btn-nav:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
 }
 
-.nav-btn:active {
-  transform: scale(0.95);
+.btn-nav:active {
+  transform: scale(0.96);
+}
+
+.btn-gradient {
+  padding: 10px 18px;
+  background: linear-gradient(135deg, #f59e0b 0%, #ec4899 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+  white-space: nowrap;
+}
+
+.btn-gradient:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+}
+
+.btn-gradient:active {
+  transform: scale(0.96);
 }
 
 /* Calendar Grid */
@@ -436,15 +484,30 @@ body {
     padding: 12px 16px;
   }
 
-  .month-year {
+  .header-right-buttons {
     width: 100%;
-    order: -1;
-    font-size: 18px;
+    flex-wrap: wrap;
   }
 
-  .nav-btn {
-    flex: 1;
+  .month-year {
+    width: 100%;
+    font-size: 18px;
+    order: 1;
+  }
+
+  #prevBtn {
+    order: 2;
+  }
+
+  .header-right-buttons {
+    order: 3;
+  }
+
+  .btn-nav,
+  .btn-gradient {
     font-size: 13px;
+    padding: 9px 14px;
+    flex: 1;
   }
 
   .day-cell {
@@ -497,9 +560,15 @@ body {
     font-size: 16px;
   }
 
-  .nav-btn {
+  .header-right-buttons {
+    width: 100%;
+  }
+
+  .btn-nav,
+  .btn-gradient {
     font-size: 12px;
-    padding: 6px 10px;
+    padding: 8px 12px;
+    flex: 1;
   }
 
   .day-cell {
