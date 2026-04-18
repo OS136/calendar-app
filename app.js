@@ -9,6 +9,8 @@ const CalendarApp = (() => {
   const calendarGridEl = document.getElementById('calendarGrid');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
+  const todayBtn = document.getElementById('todayBtn');
+  const addEventBtn = document.getElementById('addEventBtn');
   const modalOverlay = document.getElementById('modalOverlay');
   const closeModalBtn = document.getElementById('closeModalBtn');
   const cancelBtn = document.getElementById('cancelBtn');
@@ -292,10 +294,22 @@ const CalendarApp = (() => {
     renderCalendar();
   }
 
+  function goToToday() {
+    currentDate = new Date();
+    renderCalendar();
+  }
+
+  function openAddEventModal() {
+    const todayStr = formatDate(new Date());
+    openModal(todayStr);
+  }
+
   // Event Listeners
   function attachEventListeners() {
     prevBtn.addEventListener('click', goToPreviousMonth);
     nextBtn.addEventListener('click', goToNextMonth);
+    todayBtn.addEventListener('click', goToToday);
+    addEventBtn.addEventListener('click', openAddEventModal);
     closeModalBtn.addEventListener('click', closeModal);
     cancelBtn.addEventListener('click', closeModal);
     eventForm.addEventListener('submit', handleFormSubmit);
