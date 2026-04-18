@@ -1,0 +1,11 @@
+# Netlify Configuration for Calendar App
+
+[build]
+  # No build step needed - static site
+  publish = "."
+
+# Redirect rules for SPA routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

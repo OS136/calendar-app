@@ -83,3 +83,27 @@
 - [x] Form validation: end time before start time shows error
 - [x] Responsive: desktop (1200px) → tablet (768px) → mobile (480px) all usable
 - [x] Modal accessible via click-outside (backdrop close)
+
+---
+
+## Netlify Deployment Plan
+
+### Pre-Deployment Setup
+- [ ] Verify git repository is clean and all changes committed
+- [ ] Create `netlify.toml` configuration file
+- [ ] Create `_redirects` file for proper routing
+- [ ] Push all changes to GitHub (or GitLab/Bitbucket)
+
+### Deployment Steps
+- [ ] Connect repository to Netlify (via Netlify dashboard)
+- [ ] Verify build settings (should be empty for static site)
+- [ ] Trigger initial deploy
+- [ ] Test all calendar features on live site
+- [ ] Enable auto-deploy on git push (optional but recommended)
+
+### Post-Deployment Verification
+- [ ] Verify app loads correctly on Netlify URL
+- [ ] Test add/edit/delete events on production
+- [ ] Verify localStorage persistence works
+- [ ] Check responsive design on mobile
+- [ ] Update README with live deployment URL
