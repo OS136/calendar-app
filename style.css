@@ -50,6 +50,11 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+#prevBtn {
+  align-self: start;
+  margin-top: 0;
+}
+
 .header-right-buttons {
   display: flex;
   flex-direction: column;
@@ -57,12 +62,8 @@ body {
   align-items: flex-end;
 }
 
-#prevBtn {
-  align-self: center;
-}
-
 #nextBtn {
-  align-self: center;
+  align-self: flex-end;
 }
 
 .buttons-column {
