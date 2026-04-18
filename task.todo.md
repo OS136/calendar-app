@@ -57,5 +57,17 @@
 - [ ] Calendar grid: Still renders correctly below header
 - [ ] Modal: Still works for add/edit/delete events
 
-### Commit
+### Commits
 ✅ Commit ID: 7a968b9 — Header layout refactored to specification
+✅ Commit ID: 8aaeef1 — Equalized Today and Add Event button widths (120px)
+
+### Completion Summary
+✅ **Header layout refactored** to match user specification
+- Line 1: Month/Year centered (flex 1)
+- Line 2: Prev (left) ↔ Next (right) — spread across full width (flex 2)
+- Line 3: Today + Add Event (right side, equal width 120px) (flex 3)
+- Desktop: 4-column grid layout
+- Tablet (768px): 2-column grid layout
+- Mobile (480px): 2-column grid layout with stacked buttons
+✅ **Responsive design verified** across all breakpoints
+✅ **All functionality preserved** — calendar, navigation, modal, add/edit/delete events work correctly
