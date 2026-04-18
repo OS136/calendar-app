@@ -116,11 +116,15 @@ body {
   padding: 12px 8px;
   background: var(--bg-white);
   border-right: 1px solid var(--border-color);
-  border-bottom: 2px solid #d1d5db;
+  border-bottom: 1px solid var(--border-color);
   cursor: pointer;
   transition: background 0.15s;
   display: flex;
   flex-direction: column;
+}
+
+.day-cell:last-child {
+  border-right: 3px solid #9ca3af;
 }
 
 .day-cell:hover {
