@@ -447,14 +447,14 @@ body {
 }
 
 .btn-secondary {
-  background: var(--bg-light);
+  background: #fff7fb;
   color: var(--text-dark);
   flex: 1;
   border: 1px solid var(--border-color);
 }
 
 .btn-secondary:hover {
-  background: #e5e7eb;
+  background: #fce7f3;
   border-color: var(--text-light);
 }
 
