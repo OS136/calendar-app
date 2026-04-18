@@ -156,7 +156,7 @@ body {
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  background: var(--bg-light);
+  background: #fff7fb;
 }
 
 .day-header:last-child {
@@ -176,7 +176,7 @@ body {
 }
 
 .day-cell:hover {
-  background: #fafafa;
+  background: #fff7fb;
 }
 
 .day-cell.other-month {
@@ -185,7 +185,7 @@ body {
 }
 
 .day-cell.other-month:hover {
-  background: #fafafa;
+  background: #fff7fb;
 }
 
 .day-cell.today {
