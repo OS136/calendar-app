@@ -4,72 +4,82 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calendar App</title>
-  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --color-accent-orange: #f59e0b;
+      --color-accent-pink: #ec4899;
+      --color-accent-yellow: #fbbf24;
+      --color-event-green: #059669;
+    }
+  </style>
 </head>
-<body>
-  <div class="container">
-    <header class="calendar-header">
-      <h1 id="monthYear" class="month-year">April 2026</h1>
-      <button id="prevBtn" class="btn-nav">← Prev</button>
-      <button id="nextBtn" class="btn-nav">Next →</button>
-      <button id="todayBtn" class="btn-gradient">Today</button>
-      <button id="addEventBtn" class="btn-gradient">+ Add Event</button>
+<body class="bg-gradient-to-br from-orange-50 to-pink-50 min-h-screen text-gray-900 leading-relaxed">
+  <div class="mx-auto px-3 sm:px-6 py-4 sm:py-6 max-w-4xl">
+    <header class="bg-white px-4 sm:px-6 py-4 border-b border-gray-300 rounded-t-xl shadow-md">
+      <h1 id="monthYear" class="text-xl sm:text-2xl font-medium text-gray-900 text-center mb-3">April 2026</h1>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
+        <button id="prevBtn" class="px-3 sm:px-4 py-2 bg-gradient-to-r from-accent-orange to-accent-yellow text-white rounded-lg font-semibold text-xs sm:text-sm transition-all hover:shadow-lg hover:-translate-y-1 active:scale-95 whitespace-nowrap">← Prev</button>
+        <button id="nextBtn" class="px-3 sm:px-4 py-2 bg-gradient-to-r from-accent-orange to-accent-yellow text-white rounded-lg font-semibold text-xs sm:text-sm transition-all hover:shadow-lg hover:-translate-y-1 active:scale-95 whitespace-nowrap">Next →</button>
+        <button id="todayBtn" class="px-3 sm:px-4 py-2 bg-gradient-to-r from-accent-orange to-accent-pink text-white rounded-lg font-semibold text-xs sm:text-sm transition-all hover:shadow-lg hover:-translate-y-1 active:scale-95 whitespace-nowrap">Today</button>
+        <button id="addEventBtn" class="px-3 sm:px-4 py-2 bg-gradient-to-r from-accent-orange to-accent-pink text-white rounded-lg font-semibold text-xs sm:text-sm transition-all hover:shadow-lg hover:-translate-y-1 active:scale-95 whitespace-nowrap">+ Add Event</button>
+      </div>
     </header>
 
-    <div class="calendar-grid" id="calendarGrid">
+    <div class="grid grid-cols-7 gap-0 bg-white border border-gray-300 border-t-0 rounded-b-xl overflow-hidden shadow-md" id="calendarGrid">
       <!-- Day headers and cells will be rendered here -->
     </div>
   </div>
 
   <!-- Modal Overlay -->
-  <div id="modalOverlay" class="modal-overlay hidden">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h2>Add Event</h2>
-        <button id="closeModalBtn" class="close-btn">×</button>
+  <div id="modalOverlay" class="fixed inset-0 bg-black/45 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg shadow-2xl w-11/12 sm:w-96 max-w-2xl max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between px-4 sm:px-6 py-4 sm:py-6 border-b border-gray-300">
+        <h2 class="text-lg font-semibold text-gray-900">Add Event</h2>
+        <button id="closeModalBtn" class="text-4xl text-gray-400 transition-colors hover:text-gray-900 hover:bg-gray-100 rounded w-8 h-8 flex items-center justify-center">×</button>
       </div>
 
-      <form id="eventForm" class="event-form">
-        <div class="form-group">
-          <label for="eventTitle">Title <span class="required">*</span></label>
-          <input type="text" id="eventTitle" name="title" placeholder="Event title" maxlength="100">
-          <span id="titleError" class="error-msg"></span>
+      <form id="eventForm" class="px-4 sm:px-6 py-4 sm:py-6">
+        <div class="flex flex-col mb-5">
+          <label for="eventTitle" class="font-medium mb-2 text-gray-900 text-sm flex items-center gap-1">Title <span class="text-red-500">*</span></label>
+          <input type="text" id="eventTitle" name="title" placeholder="Event title" maxlength="100" class="px-3 py-2 border border-gray-300 rounded-lg text-sm font-inherit transition-all focus:outline-none focus:border-accent-orange focus:ring-2 focus:ring-orange-100 bg-white">
+          <span id="titleError" class="text-red-500 text-xs mt-1 min-h-4"></span>
         </div>
 
-        <div class="form-group">
-          <label for="eventDate">Date <span class="required">*</span></label>
-          <input type="date" id="eventDate" name="date" required>
-          <span id="dateError" class="error-msg"></span>
+        <div class="flex flex-col mb-5">
+          <label for="eventDate" class="font-medium mb-2 text-gray-900 text-sm flex items-center gap-1">Date <span class="text-red-500">*</span></label>
+          <input type="date" id="eventDate" name="date" required class="px-3 py-2 border border-gray-300 rounded-lg text-sm font-inherit transition-all focus:outline-none focus:border-accent-orange focus:ring-2 focus:ring-orange-100 bg-white">
+          <span id="dateError" class="text-red-500 text-xs mt-1 min-h-4"></span>
         </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label for="eventStartTime">Start Time</label>
-            <input type="time" id="eventStartTime" name="startTime">
-            <span id="startTimeError" class="error-msg"></span>
+        <div class="grid grid-cols-2 gap-3 mb-5">
+          <div class="flex flex-col">
+            <label for="eventStartTime" class="font-medium mb-2 text-gray-900 text-sm">Start Time</label>
+            <input type="time" id="eventStartTime" name="startTime" class="px-3 py-2 border border-gray-300 rounded-lg text-sm font-inherit transition-all focus:outline-none focus:border-accent-orange focus:ring-2 focus:ring-orange-100 bg-white">
+            <span id="startTimeError" class="text-red-500 text-xs mt-1 min-h-4"></span>
           </div>
-          <div class="form-group">
-            <label for="eventEndTime">End Time</label>
-            <input type="time" id="eventEndTime" name="endTime">
-            <span id="endTimeError" class="error-msg"></span>
+          <div class="flex flex-col">
+            <label for="eventEndTime" class="font-medium mb-2 text-gray-900 text-sm">End Time</label>
+            <input type="time" id="eventEndTime" name="endTime" class="px-3 py-2 border border-gray-300 rounded-lg text-sm font-inherit transition-all focus:outline-none focus:border-accent-orange focus:ring-2 focus:ring-orange-100 bg-white">
+            <span id="endTimeError" class="text-red-500 text-xs mt-1 min-h-4"></span>
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="eventDescription">Description</label>
-          <textarea id="eventDescription" name="description" placeholder="Optional description" rows="3"></textarea>
+        <div class="flex flex-col mb-7">
+          <label for="eventDescription" class="font-medium mb-2 text-gray-900 text-sm">Description</label>
+          <textarea id="eventDescription" name="description" placeholder="Optional description" rows="3" class="px-3 py-2 border border-gray-300 rounded-lg text-sm font-inherit transition-all focus:outline-none focus:border-accent-orange focus:ring-2 focus:ring-orange-100 bg-white resize-vertical"></textarea>
         </div>
 
         <input type="hidden" id="eventId" name="id">
 
-        <div class="form-actions">
-          <button type="button" id="cancelBtn" class="btn-secondary">Cancel</button>
-          <button type="submit" class="btn-primary">Save Event</button>
+        <div class="flex gap-3 pt-4 border-t border-gray-300">
+          <button type="button" id="cancelBtn" class="flex-1 px-4 py-2 bg-pink-50 text-gray-900 rounded-lg font-medium text-sm transition-all border border-gray-300 hover:bg-pink-100">Cancel</button>
+          <button type="submit" class="flex-1 px-4 py-2 bg-gradient-to-r from-accent-orange to-accent-pink text-white rounded-lg font-medium text-sm transition-all hover:shadow-lg hover:-translate-y-0.5">Save Event</button>
         </div>
       </form>
 
-      <div id="deleteSection" class="delete-section hidden">
-        <button id="deleteBtn" class="btn-danger">Delete Event</button>
+      <div id="deleteSection" class="px-4 sm:px-6 py-4 sm:py-5 border-t border-gray-300 hidden">
+        <button id="deleteBtn" class="w-full px-4 py-2 bg-red-500 text-white rounded-lg font-medium text-sm transition-all hover:bg-red-600 hover:shadow-lg">Delete Event</button>
       </div>
     </div>
   </div>

@@ -161,7 +161,7 @@ const CalendarApp = (() => {
     const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     dayNames.forEach(day => {
       const header = document.createElement('div');
-      header.className = 'day-header';
+      header.className = 'font-semibold text-center py-2 sm:py-3 px-1 sm:px-2 text-gray-900 border-b border-r border-gray-300 text-xs uppercase tracking-wide bg-pink-50 last:border-r-0';
       header.textContent = day;
       calendarGridEl.appendChild(header);
     });
@@ -170,7 +170,7 @@ const CalendarApp = (() => {
     const firstDay = getFirstDayOfMonth(currentDate);
     for (let i = 0; i < firstDay; i++) {
       const emptyCell = document.createElement('div');
-      emptyCell.className = 'day-cell other-month';
+      emptyCell.className = 'min-h-20 sm:min-h-32 p-1 sm:p-2 bg-white border-r border-b border-gray-300 cursor-pointer transition-colors hover:bg-pink-50 flex flex-col text-gray-400 last:border-r-0';
       calendarGridEl.appendChild(emptyCell);
     }
 
@@ -180,21 +180,29 @@ const CalendarApp = (() => {
       const cellDate = new Date(year, month, day);
       const dateStr = formatDate(cellDate);
       const dayEventsToday = getEventsByDate(dateStr);
+      const isTodayDate = isToday(dateStr);
 
       const cell = document.createElement('div');
-      cell.className = 'day-cell';
-      if (isToday(dateStr)) cell.classList.add('today');
+      const cellClasses = ['min-h-20', 'sm:min-h-32', 'p-1', 'sm:p-2', 'bg-white', 'border-r', 'border-b', 'border-gray-300', 'cursor-pointer', 'transition-colors', 'hover:bg-pink-50', 'flex', 'flex-col'];
+      if (isTodayDate) {
+        cellClasses.push('bg-yellow-50');
+      }
+      cell.className = cellClasses.join(' ');
 
       const dayNumber = document.createElement('div');
-      dayNumber.className = 'day-number';
+      const dayNumberClasses = ['font-medium', 'mb-1', 'sm:mb-2', 'text-xs', 'sm:text-sm', 'text-gray-900'];
+      if (isTodayDate) {
+        dayNumberClasses.push('bg-gradient-to-r', 'from-accent-orange', 'to-accent-yellow', 'text-white', 'rounded-full', 'w-6', 'h-6', 'sm:w-8', 'sm:h-8', 'flex', 'items-center', 'justify-center', 'font-semibold', 'text-xs', 'sm:text-sm');
+      }
+      dayNumber.className = dayNumberClasses.join(' ');
       dayNumber.textContent = day;
       cell.appendChild(dayNumber);
 
       const eventsList = document.createElement('div');
-      eventsList.className = 'events-list';
+      eventsList.className = 'flex-1 flex flex-col gap-0.5 overflow-y-auto overflow-x-hidden';
       dayEventsToday.forEach(event => {
         const chip = document.createElement('div');
-        chip.className = 'event-chip';
+        chip.className = 'bg-gradient-to-r from-accent-orange to-accent-pink text-white px-1 sm:px-2 py-0.5 sm:py-1 rounded text-xs cursor-pointer whitespace-nowrap overflow-hidden text-ellipsis transition-all font-medium shadow-sm hover:from-orange-600 hover:to-pink-600 hover:shadow-md hover:-translate-y-0.5';
         chip.textContent = event.title;
         chip.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -226,7 +234,7 @@ const CalendarApp = (() => {
         descriptionInput.value = event.description;
         eventIdInput.value = event.id;
         deleteSection.classList.remove('hidden');
-        document.querySelector('.modal-header h2').textContent = 'Edit Event';
+        modalOverlay.querySelector('h2').textContent = 'Edit Event';
       }
     } else {
       titleInput.value = '';
@@ -235,7 +243,7 @@ const CalendarApp = (() => {
       descriptionInput.value = '';
       eventIdInput.value = '';
       deleteSection.classList.add('hidden');
-      document.querySelector('.modal-header h2').textContent = 'Add Event';
+      modalOverlay.querySelector('h2').textContent = 'Add Event';
     }
 
     modalOverlay.classList.remove('hidden');
