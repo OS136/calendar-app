@@ -54,6 +54,10 @@ calendar-app-folder/
 └── README.md           # This file
 ```
 
+## 🔗 Live project:
+
+https://calendar-app-bf2544.netlify.app/
+
 ## Technologies Used
 
 - **HTML5** — Semantic markup
